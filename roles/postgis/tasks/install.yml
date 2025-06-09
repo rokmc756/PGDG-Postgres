@@ -1,11 +1,4 @@
 ---
-# Install PostsGIS extention on Greenplum database
-# GPDB 4.x - 640 Page in https://gpdb.docs.pivotal.io/archive/43320/pdf/GPDB43RefGuide.pdf
-# GPDB 5.x - https://docs.vmware.com/en/VMware-Greenplum/5/greenplum-database/ref_guide-extensions-postGIS.html
-# GPDB 6.x - https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/analytics-postGIS.html
-# GPDB 7.x - https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/analytics-postGIS.html
-
-
 - name: Check if the Greenplum Database Software is Already Installed
   stat: path={{ gpdb.base_dir }}/greenplum-db
   register: gpdb_installed

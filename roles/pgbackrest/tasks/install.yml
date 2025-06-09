@@ -1,12 +1,12 @@
 ---
-- name: Copy the VMwawre Postgres RPM File to All Hosts
+- name: Copy the PGDG Postgres RPM File to All Hosts
   become: true
   become_user: root
   copy: src={{ package_name }}-{{ major_version }}.{{ minor_version }}-{{ patch_version }}.{{ rhel_version }}.x86_64.rpm dest=/home/jomoon/{{ package_name }}-{{ major_version }}.{{ minor_version }}-{{ patch_version }}.{{ rhel_version }}.x86_64.rpm mode=0644 owner=jomoon group=jomoon
   when: inventory_hostname in groups['repository']
 
 
-- name: Install VMware Postgres
+- name: Install PGDG Postgres
   become: true
   become_user: root
   yum:

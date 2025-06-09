@@ -4,17 +4,17 @@
   when: ansible_os_family != 'RedHat'
 
 
-- name: Install VMware Postgres PGBackRest
+- name: Install PGDG Postgres PGBackRest
   import_tasks: install.yml
   tags: install
 
 
-- name: Uninstall VMware Postgres PGBackRest
+- name: Uninstall PGDG Postgres PGBackRest
   import_tasks: uninstall.yml
   tags: uninstall
 
 
-- name: Upgrade VMware Postgres PGBackRest
+- name: Upgrade PGDG Postgres PGBackRest
   import_tasks: upgrade.yml
   tags: upgrade
 

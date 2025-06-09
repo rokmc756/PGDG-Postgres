@@ -2,7 +2,7 @@
 ![alt text](https://github.com/rokmc756/postgres-cluster/blob/main/roles/patroni-postgres/images/patroni_cluster_architecture.png)
 
 
-## Main Components of Patroni cluster for VMware Postgres
+## Main Components of Patroni cluster for PGDG Postgres
 - Patroni provides a template for creating, managing, maintaining and monitoring highly available clusters using Postgres streaming replication. Patroni handles the Postgres database initialization as well as planned switchovers or unplanned failovers.
 - ETCD stores the state of the PostgreSQL cluster.  When any changes in the state of any PostgreSQL node are found, Patroni updates the state change in the ETCD key-value store. ETCD uses this information to elects the master node and keeps the cluster UP and running.
 - HAProxy keeps track of changes in the Master/Slave nodes and connects to the appropriate master node when the clients request a connection.
@@ -14,7 +14,7 @@ It guides you how to set up a threer-node PostgreSQL cluster with Patroni on Cen
 - CentOS 7
 
 
-## How to install Patroni Cluster for VMware Postgres
+## How to install Patroni Cluster for PGDG Postgres
 #### Clone postgres-cluster ansible playbook from github
 ~~~
 $ git clone https://github.com/rokmc756/postgres-cluster
@@ -73,17 +73,17 @@ $ vi setup-hosts.yml
     - patroni-postgres
 ~~~
 
-## How to uninstall Patroni Cluster for VMware Postgres
+## How to uninstall Patroni Cluster for PGDG Postgres
 ~~~
 $ make install
 ~~~
 
-## How to uninstall Patroni Cluster for VMware Postgres
+## How to uninstall Patroni Cluster for PGDG Postgres
 ~~~
 $ make uninstall
 ~~~
 
-## How to upgrade Patroni Cluster for VMware Postgres
+## How to upgrade Patroni Cluster for PGDG Postgres
 ~~~
 $ make upgrade
 ~~~

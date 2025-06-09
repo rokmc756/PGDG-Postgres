@@ -73,7 +73,7 @@
     - "v3.ext"
 
 
-- name: Add SSL Configuration File to Authenticate SSL User into OSS Postgres Database Server
+- name: Add SSL Configuration File to Authenticate SSL User into PGDG Postgres Database Server
   become_user: postgres
   lineinfile:
     dest: "{{ pgsql.base_dir }}/{{ pgsql.major_version }}/data/{{ item.file }}"

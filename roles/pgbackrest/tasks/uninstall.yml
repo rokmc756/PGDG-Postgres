@@ -157,7 +157,7 @@
 - debug: msg={{ patroni_listed }}
 
 
-#- name: Uninstall VMware Postgres on all Hosts
+#- name: Uninstall PGDG Postgres on all Hosts
 #  become: true
 #  yum:
 #    name: "{{ package_name }}-{{ major_version }}.{{ minor_version }}-{{ patch_version }}.{{ rhel_version }}"
@@ -167,7 +167,7 @@
 #  when: inventory_hostname in groups['repository']
 
 
-#- name: Remove the VMware Postgres RPM File to All Hosts in Cluster
+#- name: Remove the PGDG Postgres RPM File to All Hosts in Cluster
 #  file:
 #    path: /home/jomoon/{{ package_name }}-{{ major_version }}.{{ minor_version }}-{{ patch_version }}.{{ rhel_version }}.x86_64.rpm
 #    state: absent

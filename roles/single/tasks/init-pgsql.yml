@@ -1,5 +1,5 @@
 ---
-- name: Initialize OSS Postgres Database Instance
+- name: Initialize PGDG Postgres Database Instance
   become_user: postgres
   shell: |
     source {{ pgsql.base_dir }}/.bash_profile
@@ -10,7 +10,7 @@
     executable: /bin/bash
 
 
-- name: Create a Single Non-HA OSS Postgres Database Server
+- name: Create a Single Non-HA PGDG Postgres Database Server
   become_user: postgres
   shell: |
     source {{ pgsql.base_dir }}/.bash_profile
@@ -21,7 +21,7 @@
     executable: /bin/bash
 
 
-- name: Verify that the psql of OSS Postgres is Installed Properly
+- name: Verify that the psql of PGDG Postgres is Installed Properly
   become_user: postgres
   shell: |
     source {{ pgsql.base_dir }}/.bash_profile
@@ -32,7 +32,7 @@
     executable: /bin/bash
 
 
-- name: Verify that the pg_ctl of OSS Postgres is Installed Properly
+- name: Verify that the pg_ctl of PGDG Postgres is Installed Properly
   become_user: postgres
   shell: |
     source {{ pgsql.base_dir }}/.bash_profile

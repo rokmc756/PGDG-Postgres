@@ -12,7 +12,7 @@
     - libpq5
 
 
-- name: Delete Configuration Files and Data Directory for OSS Postgres
+- name: Delete Configuration Files and Data Directory for PGDG Postgres
   file:
     path: "{{ item }}"
     state: absent
@@ -23,7 +23,7 @@
 - debug: msg="{{ rh_uninstall_pkgs }}"
 
 
-- name: Uninstall Prerequesties RPM Packages for OSS Postgres
+- name: Uninstall Prerequesties RPM Packages for PGDG Postgres
   dnf:
     name: "{{ rh_uninstall_pkgs }}"
     state: absent

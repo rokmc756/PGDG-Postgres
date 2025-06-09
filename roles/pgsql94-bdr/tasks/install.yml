@@ -35,11 +35,11 @@
     var: bdr94_repo_added
 
 
-#- name: Copy the VMware Postgres RPM File to All Hosts
+#- name: Copy the PGDG Postgres RPM File to All Hosts
 #  copy: src=postgresql-bdr94-bdr-1.0.5-1.el7.x86_64.rpm dest=/home/jomoon/postgresql-bdr94-bdr-1.0.5-1.el7.x86_64.rpm mode=0644 owner=jomoon group=jomoon
 
 
-#- name: Install VMware Postgres on all Hosts
+#- name: Install PGDG Postgres on all Hosts
 #  become: true
 #  yum:
 #    name: /home/jomoon/postgresql-bdr94-bdr-1.0.5-1.el7.x86_64.rpm
