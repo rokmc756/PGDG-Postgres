@@ -1,0 +1,12 @@
+---
+- name: Install Python Pip Module
+  shell: |
+    pip3 install psycopg
+  async: 180
+  poll: 5
+  environment:
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+  register: install_pip3_python_modules
+  # pip3 install psycopg2
+
+

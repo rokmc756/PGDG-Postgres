@@ -1,0 +1,50 @@
+---
+- name: Alternative Python Version
+  shell: |
+    /usr/sbin/update-alternatives --install /usr/bin/python python {{ yum_python_version }} 1
+    /usr/sbin/alternatives --set python {{ yum_python_version }}
+  register: alternatives_python
+  ignore_errors: true
+  when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS' or ansible_distribution == 'Rocky'
+
+
+- name: Uninstall PostgreSQL Prereq RPM Package
+  package:
+    name: "{{ item }}"
+    state: absent
+  register: uninstall_prereq_rpm_packages
+  ignore_errors: true
+  with_items:
+    - python3-click
+    - python3-prettytable
+    - python3-psutil
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+
+
+- name: Uninstall PostgreSQL Patroni RPM Package
+  package:
+    name: "{{ item }}"
+    state: absent
+  register: uninstall_patroni_rpm_packages
+  ignore_errors: true
+  with_items:
+    - patroni-etcd
+    - patroni
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+
+
+- name: Uninstall PostgreSQL RPM Packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  register: delete_postgres_rpm_packages
+  ignore_errors: true
+  with_items:
+    - postgresql{{ pgsql.major_version }}-server
+    - postgresql{{ pgsql.major_version }}
+    - libpq5
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+

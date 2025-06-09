@@ -1,0 +1,54 @@
+---
+- name: Alternative Python Version
+  become_user: root
+  shell: |
+    update-alternatives --install /usr/bin/python python {{ yum_python_version }} 1
+    alternatives --set python {{ yum_python_version }}
+  register: alternative_python_version
+
+
+- name: Uninstall the PostgreSQL RPM Package
+  package:
+    name: "{{ item }}"
+    state: absent
+    disable_gpg_check: true
+  async: 180
+  poll: 5
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+  with_items:
+    - postgresql-private-devel
+    - libpq
+    - libpq5
+
+
+- name: Install Common Prerequisties RPM Packages for PostgreSQL
+  dnf:
+    name: "{{ rh_install_pkgs }}"
+    state: present
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+
+
+- name: Install ipaddress Pip3 module
+  shell: |
+    pip3 install ipaddress
+  register: install_pip3_ipaddress
+  when: hostvars[inventory_hostname].ansible_distribution_major_version|int <= 7
+
+
+- name: Install the PostgreSQL RPM Package
+  package:
+    name: "{{ item }}"
+    state: present
+    disable_gpg_check: true
+  async: 180
+  poll: 5
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+  with_items:
+    - postgresql{{ pgsql.major_version }}-server
+    - postgresql{{ pgsql.major_version }}
+    - python3-psycopg2
+    # - libpq5
+

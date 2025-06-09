@@ -1,0 +1,45 @@
+---
+_ssl:
+  ssl_dir: "{{ pgsql.base_dir }}/certs"
+  ssl_days: 3660
+  ssl_country: "KR"
+  ssl_state: "Seoul"
+  ssl_location: "Guro"
+  ssl_organization: "VMware"
+  ssl_organization_unit: "Tanzu"
+  ssl_common_name: "jtest.pivotal.io"
+  ssl_email: "jomoon@pivotal.io"
+
+
+_patroni:
+  major_version: "3"
+  minor_version: "2"
+  patch_version: "0"
+  build_version: "1"
+  os_version: el9
+  arch_type: x86_64
+  bin_type: rpm
+  bin_path: "/usr/bin/patroni"
+  ctl_path: "/usr/bin/patronictl"
+  cluster_name: patclu01
+  sync_mode: true
+  with_pkgs: rue
+  enable_ssl: true
+  # false is for pgbackrest, not found yet how does pgbackrest
+  # interactive with synchronous mode in patroni cluster
+  # sync_mode: on    # one of node will be a Sync Standby role
+
+
+_etcd:
+  major_version: "3"
+  minor_version: "3"
+  patch_version: "27"
+  build_version: ""
+  enable_ssl: true
+  arch_type: x86_64
+  os_version: el9
+  bin_type: rpm
+  download_bin: false
+  blank: " "
+  # etcd 3.4.x and 3.5.x does not work for vmware-postgres 15.x versions
+

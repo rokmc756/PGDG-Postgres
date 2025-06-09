@@ -1,0 +1,24 @@
+---
+_pgfailover:
+  monitor_database: monitor                           # Database names
+  workers_database: ha
+  app_database: appdb                                 # Application database name for replication
+  bin_path: "/usr/pgsql-{{ pgsql.major_version }}/bin/"
+  ctl_path: "/usr/bin/"
+  cluster_name: pgfailclu01
+  sslmode: prefer   # require
+  enable_ssl: true
+
+
+_ssl:
+  ssl_dir: "{{ pgsql.base_dir }}/certs"
+  ssl_days: 3660
+  ssl_country: "KR"
+  ssl_state: "Seoul"
+  ssl_location: "Guro"
+  ssl_organization: "VMware"
+  ssl_organization_unit: "Tanzu"
+  ssl_common_name: "jtest.pivotal.io"
+  ssl_email: "jomoon@pivotal.io"
+  # enable_ssl_monitor: true
+

@@ -1,0 +1,36 @@
+---
+- name: Uninstall PostgreSQL RPM Package
+  package:
+    name: "{{ item }}"
+    state: absent
+    disable_gpg_check: true
+  register: uninstall_pkgs
+  ignore_errors: yes
+  async: 180
+  poll: 5
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+  with_items:
+    - "postgresql{{ pgsql.major_version }}"
+    - "postgresql{{ pgsql.major_version }}-server"
+    - "pg_auto_failover_{{ pgsql.major_version }}"
+
+
+- name: Delete Configuration Files and Data Directory for PostgreSQL PGAutoFailover
+  file:
+    path: "{{ item }}"
+    state: absent
+  register: delete_patroni_config_files
+  ignore_errors: yes
+  with_items: "{{ delete_file_list }}"
+
+
+- name: Uninstall Prerequesties RPM Packages for PostgreSQL PGAutoFailover
+  package:
+    name: "{{ rh_uninstall_pkgs }}"
+    state: absent
+    skip_broken: yes
+  ignore_errors: yes
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+

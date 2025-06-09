@@ -1,0 +1,13 @@
+
+- hosts: lab
+  tasks:
+    - name: "{{ power_title }} Virtual Machines"
+      become: true
+      shell: |
+        virsh {{ power_state }} {{ item }}
+      register: power_vms
+      ignore_errors: true
+      loop: "{{ pgsql.vms.co10 }}"
+      # loop: "{{ pgsql.vms.rk9 }}"
+      # loop: "{{ pgsql.vms.ubt24 }}"
+

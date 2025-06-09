@@ -1,0 +1,32 @@
+---
+- name: Uninstall the PostgreSQL RPM Package
+  package:
+    name: "{{ item }}"
+    state: absent
+    disable_gpg_check: true
+  async: 180
+  poll: 5
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+  with_items:
+    - postgresql-private-devel
+    - libpq
+    - libpq5
+
+
+- name: Install PostgreSQL Packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - postgresql{{ postgres_release }}-server
+    - postgresql{{ postgres_release }}
+    - python3-psycopg2
+    # - libpq5
+
+
+- name: Install Patroni Packages
+  yum:
+    name: patroni
+    state: present
+

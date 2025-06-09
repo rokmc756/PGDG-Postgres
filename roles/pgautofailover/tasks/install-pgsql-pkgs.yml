@@ -1,0 +1,56 @@
+---
+- name: Alternative Python Version
+  shell: |
+    /usr/sbin/update-alternatives --install /usr/bin/python python {{ yum_python_version }} 1
+    /usr/sbin/alternatives --set python {{ yum_python_version }}
+  register: alternatives_python
+  when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS' or ansible_distribution == 'Rocky'
+
+
+- name: Uninstall the PostgreSQL RPM Package
+  package:
+    name: "{{ item }}"
+    state: absent
+    disable_gpg_check: true
+  async: 180
+  poll: 5
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+  with_items:
+    - postgresql-private-devel
+    - libpq
+    - libpq5
+
+
+- name: Install Common Prerequisties RPM Packages for PostgreSQL PGAutoFailover
+  package:
+    name:  "{{ rh_install_pkgs }}"
+    state: present
+    skip_broken: yes
+  async: 300
+  poll: 5
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+
+
+- name: Install PostgreSQL Packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+  with_items:
+    - "postgresql{{ pgsql.major_version }}-server"
+    - "postgresql{{ pgsql.major_version }}"
+    - python3-psycopg2
+    # - "libpq5"
+
+
+- name: Install PGAutoFailover Packages
+  yum:
+    name: pg_auto_failover_{{ pgsql.major_version }}
+    state: present
+  vars:
+    ansible_python_interpreter: "{{ yum_python_version }}"
+
+

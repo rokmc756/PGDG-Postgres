@@ -1,0 +1,17 @@
+---
+- name: Disable SSL on Monitor
+  become_user: postgres
+  shell: |
+    export PGDATA={{ pgsql.base_dir }}/{{ pgsql.major_version }}/monitor
+    /usr/pgsql-{{ pgsql.major_version }}/bin/pg_autoctl disable ssl
+  register: disable_ssl_monitor
+  ignore_errors: true
+
+
+- name: Restart PGAutoFailover Service to Apply SSL Changes
+  become_user: postgres
+  shell: |
+    sudo systemctl restart pgautofailover
+  register: restart_pgautofailover
+  ignore_errors: true
+

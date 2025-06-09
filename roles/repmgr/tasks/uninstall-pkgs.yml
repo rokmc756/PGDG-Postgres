@@ -1,0 +1,36 @@
+---
+- name: Uninstall Repmgr Packages
+  yum:
+    name: "{{ repmgr_package }}"
+    state: present
+  ignore_errors: true
+
+
+- name: Uninstall PostgreSQL Packages
+  yum:
+    name: "{{ postgresql_server_package }}"
+    state: absent
+  ignore_errors: true
+  # when: repmgr_install_postgresql|bool
+
+
+- name: Uninstall PostgreSQL Ext Packages
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - postgresql-private-libs
+    - postgresql{{ postgres_release }}-libs
+    - postgresql{{ postgres_release }}
+
+
+# when: repmgr_install_postgresql|bool
+#
+#- name: Download and Install GPG Key
+#  rpm_key:
+#    state: absent
+#    key: https://ftp.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL
+#  # when: repmgr_install_postgresql|bool
+#  # key: https://download.postgresql.org/pub/repos/yum/keys/RPM-GPG-KEY-PGDG
+
+

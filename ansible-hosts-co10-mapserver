@@ -1,0 +1,18 @@
+[all:vars]
+ssh_key_filename="id_rsa"
+remote_machine_username="jomoon"
+remote_machine_password="changeme"
+
+
+[mapserver]
+ubt22-lfs  ansible_ssh_host=192.168.2.198
+
+
+[workers]
+co10-node01  ansible_ssh_host=192.168.2.221
+co10-node02  ansible_ssh_host=192.168.2.222
+co10-node03  ansible_ssh_host=192.168.2.223
+co10-node04  ansible_ssh_host=192.168.2.224
+co10-node05  ansible_ssh_host=192.168.2.225
+
+

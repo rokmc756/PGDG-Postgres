@@ -1,0 +1,16 @@
+[all:vars]
+ssh_key_filename="id_rsa"
+remote_machine_username="jomoon"
+remote_machine_password="changeme"
+
+
+[primary]
+co10-node01  ansible_ssh_host=192.168.2.221  her_name=testdbSrv1  db_server_name=server1  relgroup=testSrv1 db_list=server1,server2,server3,server4,server5
+
+
+[secondary]
+co10-node02  ansible_ssh_host=192.168.2.222  her_name=testdbSrv2  db_server_name=server2  relgroup=testSrv2 db_list=server2,server3,server4,server5,server1
+co10-node03  ansible_ssh_host=192.168.2.223  her_name=testdbSrv3  db_server_name=server3  relgroup=testSrv3 db_list=server3,server4,server5,server1,server2
+co10-node04  ansible_ssh_host=192.168.2.224  her_name=testdbSrv4  db_server_name=server4  relgroup=testSrv4 db_list=server4,server5,server1,server2,server3
+co10-node05  ansible_ssh_host=192.168.2.225  her_name=testdbSrv5  db_server_name=server5  relgroup=testSrv5 db_list=server5,server1,server2,server3,server4
+
