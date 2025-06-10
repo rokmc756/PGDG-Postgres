@@ -97,3 +97,18 @@
     - "/var/run/bucardo"
     - "/var/log/bucardo"
 
+
+- name: Copy Bucardo User Variables
+  template:
+    src: "{{ item.sfn }}"
+    dest: "{{ item.dfn }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    force: yes
+  register: copy_bucardo_user_vars
+  with_items:
+    - { sfn: "pgpass.j2",     dfn: "/home/postgres/.pgpass",     mode: "0600",  owner: "postgres",  group: "postgres" }
+    - { sfn: "bucardorc.j2",  dfn: "/home/postgres/.bucardorc",  mode: "0644",  owner: "postgres",  group: "postgres" }
+
+

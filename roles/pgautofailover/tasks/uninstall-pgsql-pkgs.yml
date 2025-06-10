@@ -25,6 +25,9 @@
   with_items: "{{ delete_file_list }}"
 
 
+- debug: msg="{{ rh_uninstall_pkgs }}"
+
+
 - name: Uninstall Prerequesties RPM Packages for PostgreSQL PGAutoFailover
   package:
     name: "{{ rh_uninstall_pkgs }}"

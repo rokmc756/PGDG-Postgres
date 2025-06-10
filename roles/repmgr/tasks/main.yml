@@ -146,8 +146,8 @@
   when: ( repo is defined and repo == true ) or ( repmgr_all is defined and repmgr_all == true )
 
 
-#- name: Reboot All Hosts
-#  import_tasks: reboot-hosts.yml
-#  tags: reboot, uninstall
-#  when: ( repo is defined and repo == true ) or ( repmgr_all is defined and repmgr_all == true )
+- name: Reboot All Hosts
+  import_tasks: reboot-hosts.yml
+  tags: reboot, uninstall
+  when: ( repo is defined and repo == true ) or ( repmgr_all is defined and repmgr_all == true )
 

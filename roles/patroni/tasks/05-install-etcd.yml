@@ -1,5 +1,5 @@
 ---
-- name: Copy ETCD "{{ etcd.major_version }}.{{ etcd.minor_version }}" RPM Package
+- name: Copy ETCD RPM Package
   copy:
     src: "{{ item }}"
     dest: "{{ common.sudo_user_home_dir }}/{{ item }}"
