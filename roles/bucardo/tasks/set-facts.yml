@@ -11,7 +11,6 @@
     ipaddr2: "{{ hostvars[inventory_hostname]['ansible_'~netdev2].ipv4.address }}"
 
 
-# https://stackoverflow.com/questions/36328907/ansible-get-all-the-ip-addresses-of-a-group
 - name: Define Facts For All Hostname
   set_fact:
     all_ext_hostnames: "{{ groups['all'] | map('extract', hostvars, ['ansible_hostname']) | join(' ') }}"
@@ -75,11 +74,6 @@
   set_fact:
     bucardo_version: "{{ _bucardo.major_version }}.{{ _bucardo.minor_version }}.{{ _bucardo.patch_version }}"
     dbix_safe_version: "{{ _dbix_safe.major_version }}.{{ _dbix_safe.minor_version }}.{{ _dbix_safe.patch_version }}"
-
-
-#- name: Define Fact of Package Names
-#  set_fact:
-#    pgsql_pkg_name: "{{ common.pgsql_pkg_name }}-{{ pgsql.major_version }}.{{ pgsql.minor_version }}-{{ pgsql.patch_version }}.{{ pgsql.os_version }}"
 
 
 - name: Define Fact of Network Address

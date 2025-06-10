@@ -1,0 +1,5 @@
+---
+
+- name: pg_repo
+  src: https://github.com/cosandr/ansible-role-pg_repo.git
+  version: v1.0.1

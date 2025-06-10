@@ -98,7 +98,7 @@
     - "/var/log/bucardo"
 
 
-- name: Copy Bucardo User Variables
+- name: Copy Bucardo User Variables and A Query File
   template:
     src: "{{ item.sfn }}"
     dest: "{{ item.dfn }}"
@@ -108,7 +108,7 @@
     force: yes
   register: copy_bucardo_user_vars
   with_items:
-    - { sfn: "pgpass.j2",     dfn: "/home/postgres/.pgpass",     mode: "0600",  owner: "postgres",  group: "postgres" }
-    - { sfn: "bucardorc.j2",  dfn: "/home/postgres/.bucardorc",  mode: "0644",  owner: "postgres",  group: "postgres" }
-
+    - { sfn: "pgpass.j2",            dfn: "/home/postgres/.pgpass",           mode: "0600",  owner: "postgres",  group: "postgres" }
+    - { sfn: "bucardorc.j2",         dfn: "/home/postgres/.bucardorc",        mode: "0644",  owner: "postgres",  group: "postgres" }
+    - { sfn: "insert-users.sql.j2",  dfn: "/home/postgres/insert-users.sql",  mode: "0644",  owner: "postgres",  group: "postgres" }
 

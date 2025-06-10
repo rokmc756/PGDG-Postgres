@@ -6,7 +6,7 @@
 
 - name: Set Facts for Package Name and List and Network Range
   import_tasks: set-facts.yml
-  tags: install, uninstall, init, enable, disable, config, stop, add, setup, remove, clone, register, unregister, verify, create, delete
+  tags: install, uninstall, init, enable, disable, config, stop, add, setup, remove, clone, register, unregister, verify, create, delete, insert
 
 
 - name: Stop and Diable Firewalld and SELinux
@@ -72,6 +72,12 @@
   import_tasks: config-bucardo.yml
   tags: config, install
   when: ( mmr is defined and mmr == true ) or ( bucardo_all is defined and bucardo_all == true )
+
+
+- name: Insert Users
+  import_tasks: insert-users.yml
+  tags: insert, install
+  when: ( user is defined and user == true ) or ( bucardo_all is defined and bucardo_all == true )
 
 
 - name: Uninitialize PostgreSQL Database

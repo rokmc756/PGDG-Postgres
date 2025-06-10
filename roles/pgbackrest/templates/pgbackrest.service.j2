@@ -1,0 +1,11 @@
+[Unit]
+Description=PgBackRest for stanza {{ name }} repo {{ repo }} [{{ backup_type }}]
+{% if pgbackrest_local_postgresql | bool %}
+ConditionPathIsDirectory=/var/lib/pgsql/{{ postgresql_version }}/data
+{% endif %}
+
+[Service]
+Type=simple
+User={{ pgbackrest_owner }}
+Group={{ pgbackrest_group }}
+ExecStart=/usr/local/bin/pgbackrest-{{ name }}-{{ backup_type }}-repo{{ repo }}

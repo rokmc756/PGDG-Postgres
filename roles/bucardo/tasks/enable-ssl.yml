@@ -87,7 +87,6 @@
     - { file: "postgresql.conf",  line: "ssl_cert_file = '{{ pgsql.base_dir }}/certs/server.crt'",                   state: present }
     - { file: "postgresql.conf",  line: "ssl_key_file = '{{ pgsql.base_dir }}/certs/server.key'",                    state: present }
   register: config_ssl_postgres
-  #  - { file: "postgresql.conf",  line: "listen_addresses = '*'",                                                    state: present }
 
 
 - name: Stop Postgres Instance manually to Apply Systemd Unit
@@ -95,11 +94,6 @@
   shell: |
     /usr/pgsql-{{ postgres_release }}/bin/pg_ctl stop -D {{ pgsql.base_dir }}/{{ postgres_release }}/data -s -m fast
   register: stop_postgres_instance
-
-
-#- name: Copy Systemd Configuration of PostgreSQL into /etc/systemd/system
-#  template: src=postgresql.systemd.j2 dest=/etc/systemd/system/postgresql.service owner=root group=root mode=644 force=yes
-#  register: copy_postgresql_systemd_config
 
 
 - name: Reload and Start PostgreSQL through Systemd

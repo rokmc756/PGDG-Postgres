@@ -1,0 +1,6 @@
+#!/bin/bash
+
+LOCK_FILE=/tmp/pgbackrest-backup.lock
+# Use flock to ensure only one pgbackrest backup runs at a time
+exec flock --verbose "$LOCK_FILE" /usr/bin/pgbackrest --stanza={{ name }} --type={{ backup_type }} --repo={{ repo }} backup
+

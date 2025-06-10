@@ -1,0 +1,36 @@
+# https://pgbackrest.org/configuration.html
+[global]
+{% for r in pgbackrest_repos %}
+{% set i = loop.index %}
+{%   for k, v in r.items() %}
+repo{{ i }}-{{ k }}={{ v }}
+{%   endfor %}
+{% endfor %}
+{% for k, v in pgbackrest_global_config.items() %}
+{{ k }}={{ v }}
+{% endfor %}
+spool-path={{ pgbackrest_spool_path }}
+{% if pgbackrest_async_archive | bool %}
+archive-async=y
+
+[global:archive-get]
+process-max={{ pgbackrest_async_archive_process_max }}
+
+[global:archive-push]
+process-max={{ pgbackrest_async_archive_process_max }}
+{% endif %}
+
+{% for stanza in pgbackrest_stanzas %}
+[{{ stanza.name }}]
+{%   for p in stanza.pg_config %}
+{%   set i = loop.index %}
+{%     for k, v in p.items() %}
+pg{{ i }}-{{ k }}={{ v }}
+{%     endfor %}
+{%   endfor %}
+{%   for k, v in stanza.get('extra', {}).items() %}
+{{ k }}={{ v }}
+{%   endfor %}
+
+{% endfor %}
+{{ pgbackrest_conf_extra }}

@@ -10,12 +10,11 @@
   with_items:
     - { regexp: "^#listen_addresses = 'localhost'",  replace: "listen_addresses = 'localhost, {{ _ipaddr }}'",  state: present }
     - { regexp: "^#wal_level = replica",             replace: "wal_level = replica",                            state: present }
-
- #  - { regexp: "^#max_replication_slots = 10",     replace: "max_replication_slots = 10",           state: present }
- #  - { regexp: "^#hot_standby = on",               replace: "hot_standby = on",                     state: present }
- #  - { regexp: "^#archive_mode = off",             replace: "archive_mode = off",                   state: present }
- #  - { regexp: "^#archive_command = ''",           replace: "archive_command = '/bin/true'",        state: present }
- #  - { regexp: "^#shared_preload_libraries = ''",  replace: "shared_preload_libraries = 'bucardo'",  state: present }
+#   - { regexp: "^#max_replication_slots = 10",     replace: "max_replication_slots = 10",           state: present }
+#   - { regexp: "^#hot_standby = on",               replace: "hot_standby = on",                     state: present }
+#   - { regexp: "^#archive_mode = off",             replace: "archive_mode = off",                   state: present }
+#   - { regexp: "^#archive_command = ''",           replace: "archive_command = '/bin/true'",        state: present }
+#   - { regexp: "^#shared_preload_libraries = ''",  replace: "shared_preload_libraries = 'bucardo'",  state: present }
 
 
 - name: Configure PostgreSQL Config for bucardo

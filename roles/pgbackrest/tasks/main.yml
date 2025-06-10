@@ -1,20 +1,73 @@
 ---
-- name: Check OS ( PGBackRest )
-  fail: msg="Not a Red Hat based system!"
-  when: ansible_os_family != 'RedHat'
+- name: Ensure archive-async is not in pgbackrest_global_config
+  fail:
+    msg: "Configure async archive with 'pgbackrest_async_archive' and remove it from 'pgbackrest_global_config'"
+  when: "'archive-async' in pgbackrest_global_config"
 
 
-- name: Install PGDG Postgres PGBackRest
-  import_tasks: install.yml
-  tags: install
+- name: Ensure spool-path is not in pgbackrest_global_config
+  fail:
+    msg: "Configure spool path with 'pgbackrest_spool_path' and remove it from 'pgbackrest_global_config'"
+  when: "'spool-path' in pgbackrest_global_config"
 
 
-- name: Uninstall PGDG Postgres PGBackRest
-  import_tasks: uninstall.yml
-  tags: uninstall
+- name: Install pgBackrest
+  yum:
+    name: pgbackrest
+    state: present
+  tags: ["install"]
 
 
-- name: Upgrade PGDG Postgres PGBackRest
-  import_tasks: upgrade.yml
-  tags: upgrade
+- name: Ensure Spool Path Exists
+  file:
+    path: "{{ pgbackrest_spool_path }}"
+    state: directory
+    owner: "{{ pgbackrest_owner }}"
+    group: "{{ pgbackrest_owner }}"
+    mode: 0700
+
+
+- name: Copy pgBackrest Config
+  template:
+    src: pgbackrest.conf.j2
+    dest: /etc/pgbackrest.conf
+    owner: "{{ pgbackrest_owner }}"
+    group: "{{ pgbackrest_owner }}"
+    mode: 0600
+  notify: Reconfigure pgBackrest
+
+
+- name: Remove Old Services
+  file:
+    path: "/etc/systemd/system/pgbackrest-{{ name }}-{{ backup_type }}.service"
+    state: absent
+  vars:
+    name: "{{ item.0.name }}"
+    backup_type: "{{ item.1.backup_type }}"
+  loop: "{{ pgbackrest_stanzas | subelements('schedules', skip_missing=True) }}"
+  loop_control:
+    label: "{{ name }} [{{ backup_type }}]"
+  notify: Reload Systemd
+
+
+- name: Remove Old Timers
+  file:
+    path: "/etc/systemd/system/pgbackrest-{{ name }}-{{ backup_type }}.timer"
+    state: absent
+  vars:
+    name: "{{ item.0.name }}"
+    backup_type: "{{ item.1.backup_type }}"
+  loop: "{{ pgbackrest_stanzas | subelements('schedules', skip_missing=True) }}"
+  loop_control:
+    label: "{{ name }} [{{ backup_type }}]"
+  notify: Reload Systemd
+
+
+- name: Configure Services and Timers
+  include_tasks: config-services.yml
+  loop: "{{ range(1, pgbackrest_repos | length + 1) | list }}"
+  loop_control:
+    loop_var: repo
+  when: pgbackrest_services_install | bool
+
 

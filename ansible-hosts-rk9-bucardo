@@ -3,13 +3,15 @@ ssh_key_filename="id_rsa"
 remote_machine_username="jomoon"
 remote_machine_password="changeme"
 
+
 [primary]
-rk9-node01  ansible_ssh_host=192.168.2.191  her_name=testdbSrv1  db_server_name=server1  relgroup=testSrv1 db_list=server1,server2,server3,server4,server5
+rk9-node01  ansible_ssh_host=192.168.2.191  her_name=tDBsrv1  tdb_name=tDB1  relgroup=tDBsrv1 db_list=tDB1,tDB2,tDB3,tDB4,tDB5
+
 
 [secondary]
-rk9-node02  ansible_ssh_host=192.168.2.192  her_name=testdbSrv2  db_server_name=server2  relgroup=testSrv2 db_list=server2,server3,server4,server5,server1
-rk9-node03  ansible_ssh_host=192.168.2.193  her_name=testdbSrv3  db_server_name=server3  relgroup=testSrv3 db_list=server3,server4,server5,server1,server2
-rk9-node04  ansible_ssh_host=192.168.2.194  her_name=testdbSrv4  db_server_name=server4  relgroup=testSrv4 db_list=server4,server5,server1,server2,server3
-rk9-node05  ansible_ssh_host=192.168.2.195  her_name=testdbSrv5  db_server_name=server5  relgroup=testSrv5 db_list=server5,server1,server2,server3,server4
+rk9-node02  ansible_ssh_host=192.168.2.192  her_name=tDBsrv2  tdb_name=tDB2  relgroup=tDBsrv2 db_list=tDB2,tDB3,tDB4,tDB5,tDB1
+rk9-node03  ansible_ssh_host=192.168.2.193  her_name=tDBsrv3  tdb_name=tDB3  relgroup=tDBsrv3 db_list=tDB3,tDB4,tDB5,tDB1,tDB2
+rk9-node04  ansible_ssh_host=192.168.2.194  her_name=tDBsrv4  tdb_name=tDB4  relgroup=tDBsrv4 db_list=tDB4,tDB5,tDB1,tDB2,tDB3
+rk9-node05  ansible_ssh_host=192.168.2.195  her_name=tDBsrv5  tdb_name=tDB5  relgroup=tDBsrv5 db_list=tDB5,tDB1,tDB2,tDB3,tDB4
 
 

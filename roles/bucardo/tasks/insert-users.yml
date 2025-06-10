@@ -1,0 +1,51 @@
+---
+- name: Insert Users
+  become_user: postgres
+  postgresql_query:
+    db: "{{ item }}"
+    login_host: "{{ inventory_hostname }}"
+    login_user: "{{ _bucardo.db_user }}"
+    login_password: "{{ _bucardo.db_password }}"
+    query: "INSERT INTO users(id, first_name, last_name, city) VALUES
+            (4, 'Ian', 'Gibson', 'Liverpool'),
+            (5, 'Tom', 'Riddle', 'Paris'),
+            (6, 'Jared', 'Dunn', 'New York');"
+  register: insert_users
+  with_items:
+    - "{{ _bucardo.dbinfo[0].db_name }}"
+  when: inventory_hostname in groups['primary']
+- debug: msg={{ insert_users }}
+  when: inventory_hostname in groups['primary']
+
+
+- name: Verify the List of Available Data on the Table
+  become_user: postgres
+  postgresql_query:
+    db: "{{ item }}"
+    login_host: "{{ inventory_hostname }}"
+    login_user: "{{ _bucardo.db_user }}"
+    login_password: "{{ _bucardo.db_password }}"
+    query: "select count(*) from users;"
+  register: verify_list_available_data
+  delegate_to: "{{ hostvars[groups['primary'][0]]['ansible_hostname'] }}"
+  with_items:
+    - "{{ _bucardo.dbinfo[0].db_name }}"
+  when: inventory_hostname in groups['all']
+- debug: msg={{ verify_list_available_data }}
+  when: inventory_hostname in groups['all']
+
+
+- name: Status Bucardo Sync
+  become_user: postgres
+  shell: |
+    bucardo status
+  register: status_bucardo_sync
+  args:
+    executable: /bin/bash
+    chdir: /home/postgres
+  environment:
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+  when: inventory_hostname in groups['primary']
+- debug: msg={{ status_bucardo_sync }}
+  when: inventory_hostname in groups['primary']
+

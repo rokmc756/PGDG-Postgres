@@ -1,1 +1,50 @@
+---
+- name: Create Stanzas
+  listen: Reconfigure pgBackrest
+  become: true
+  become_user: "{{ pgbackrest_owner }}"
+  command: pgbackrest --stanza={{ item.name }} stanza-create
+  loop: "{{ pgbackrest_stanzas }}"
+  loop_control:
+    label: "{{ item.name }}"
+  # molecule doesn't have postgres running
+  when:
+    - "'notest' not in ansible_skip_tags"
+    - "'recovery-option' not in item.get('extra', {})"
+
+
+- name: Restore Standby from Backup
+  block:
+    - name: Stop Database
+      listen: Reconfigure pgBackrest
+      systemd:
+        name: "postgresql-{{ postgresql_version }}"
+        state: stopped
+
+    - name: Restore Standby
+      listen: Reconfigure pgBackrest
+      become: true
+      become_user: "{{ pgbackrest_owner }}"
+      command: pgbackrest --stanza={{ item.name }} --repo={{ item.restore_repo | default('1') }} --delta --type=standby restore
+      loop: "{{ pgbackrest_stanzas }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when:
+        - "'recovery-option' in item.get('extra', {})"
+
+    - name: Start Database
+      listen: reconfigure pgbackrest
+      systemd:
+        name: "postgresql-{{ postgresql_version }}"
+        state: started
+  when:
+    - "'notest' not in ansible_skip_tags"
+    # Only run if there's at least one stanza with recovery-option set
+    - pgbackrest_stanzas | json_query('[*].extra."recovery-option"')
+    - pgbackrest_restore_standby | bool
+
+
+- name: Reload Systemd
+  systemd:
+    daemon_reload: true
 

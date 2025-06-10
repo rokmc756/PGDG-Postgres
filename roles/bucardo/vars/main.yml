@@ -18,7 +18,7 @@ _bucardo:
   minor_version: "6"
   patch_version: "0"
   build_version: ""
-  os_version: el9
+  os_version: el10
   arch_type: x86_64
   bin_type: tar.gz
   db_name: bucardo
@@ -30,6 +30,10 @@ _bucardo:
   download: false
   repo_url: ""
   download_url: ""
+  dbinfo:
+    - { db_name: "testdb",        db_user: "bucardo",  db_password: "changeme", attr_flags: "SUPERUSER,CREATEDB,CREATEROLE,INHERIT,LOGIN,REPLICATION" }
+    - { db_name: "bucardo",       db_user: "bucardo",  db_password: "changeme", attr_flags: "SUPERUSER,CREATEDB,CREATEROLE,INHERIT,LOGIN,REPLICATION" }
+    - { db_name: "pgsql_testdb",  db_user: "jomoon",   db_password: "changeme", attr_flags: "SUPERUSER,CREATEDB,CREATEROLE,INHERIT,LOGIN,REPLICATION" }
 
 
 _dbix_safe:
@@ -38,7 +42,7 @@ _dbix_safe:
   minor_version: "2"
   patch_version: "5"
   build_version: ""
-  os_version: el9
+  os_version: el10
   arch_type: x86_64
   bin_type: tar.gz
   domain: "jtest.pivotal.io"

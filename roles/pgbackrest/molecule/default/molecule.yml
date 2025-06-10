@@ -1,0 +1,44 @@
+---
+
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+driver:
+  name: docker
+platforms:
+  - name: "backup_ol${MOLECULE_OL_VERSION:-8}"
+    image: "oraclelinux:${MOLECULE_OL_VERSION:-8}"
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+    groups: ["backup"]
+
+  - name: "stby_ol${MOLECULE_OL_VERSION:-8}"
+    image: "oraclelinux:${MOLECULE_OL_VERSION:-8}"
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+    groups: ["standby"]
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        postgresql_version: ${MOLECULE_PG_VERSION:-"13"}
+verifier:
+  name: ansible
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .

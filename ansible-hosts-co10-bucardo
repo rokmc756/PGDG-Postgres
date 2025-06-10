@@ -5,12 +5,13 @@ remote_machine_password="changeme"
 
 
 [primary]
-co10-node01  ansible_ssh_host=192.168.2.221  her_name=testdbSrv1  db_server_name=server1  relgroup=testSrv1 db_list=server1,server2,server3,server4,server5
+co10-node01  ansible_ssh_host=192.168.2.221  her_name=tDBsrv1  tdb_name=tDB1  relgroup=tDBsrv1 db_list=tDB1,tDB2,tDB3,tDB4,tDB5
 
 
 [secondary]
-co10-node02  ansible_ssh_host=192.168.2.222  her_name=testdbSrv2  db_server_name=server2  relgroup=testSrv2 db_list=server2,server3,server4,server5,server1
-co10-node03  ansible_ssh_host=192.168.2.223  her_name=testdbSrv3  db_server_name=server3  relgroup=testSrv3 db_list=server3,server4,server5,server1,server2
-co10-node04  ansible_ssh_host=192.168.2.224  her_name=testdbSrv4  db_server_name=server4  relgroup=testSrv4 db_list=server4,server5,server1,server2,server3
-co10-node05  ansible_ssh_host=192.168.2.225  her_name=testdbSrv5  db_server_name=server5  relgroup=testSrv5 db_list=server5,server1,server2,server3,server4
+co10-node02  ansible_ssh_host=192.168.2.222  her_name=tDBsrv2  tdb_name=tDB2  relgroup=tDBsrv2 db_list=tDB2,tDB3,tDB4,tDB5,tDB1
+co10-node03  ansible_ssh_host=192.168.2.223  her_name=tDBsrv3  tdb_name=tDB3  relgroup=tDBsrv3 db_list=tDB3,tDB4,tDB5,tDB1,tDB2
+co10-node04  ansible_ssh_host=192.168.2.224  her_name=tDBsrv4  tdb_name=tDB4  relgroup=tDBsrv4 db_list=tDB4,tDB5,tDB1,tDB2,tDB3
+co10-node05  ansible_ssh_host=192.168.2.225  her_name=tDBsrv5  tdb_name=tDB5  relgroup=tDBsrv5 db_list=tDB5,tDB1,tDB2,tDB3,tDB4
+
 

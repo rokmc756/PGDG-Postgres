@@ -8,19 +8,7 @@
   args:
     chdir: "{{ pgsql.base_dir }}"
     executable: /bin/bash
-  # source {{ pgsql.base_dir }}/.bash_profile
   # /usr/pgsql-{{ postgres_release }}/bin/initdb -D /var/lib/pgsql/{{ postgres_release }}/data
-
-
-#- name: Create a Single Postgres Database Server
-#  become_user: postgres
-#  shell: |
-#    source {{ pgsql.base_dir }}/.bash_profile
-#    /usr/pgsql-{{ postgres_release }}/bin/postgres -D /var/lib/pgsql/{{ postgres_release }}/data > /var/lib/pgsql/{{ postgres_release }}/data/logfile 2>&1 &
-#  register: create_postgres_instance
-#  args:
-#    chdir: "{{ pgsql.base_dir }}"
-#    executable: /bin/bash
 
 
 - name: Enable and Restart PostgreSQL
