@@ -60,7 +60,15 @@
     rh_install_pkgs: "{{ rh_common_dep_pkgs ~ ',' ~ rh9_dep_pkgs ~ ',' ~ rh9_python_pkgs }}"
     rh_uninstall_pkgs: "{{ remove_rh_common_dep_pkgs ~ ',' ~ rh9_dep_pkgs ~ ',' ~ rh9_python_pkgs }}"
     yum_python_version: "/usr/bin/python3"
-  when: ( ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or ansible_distribution == "Rocky" ) and ansible_distribution_major_version|int >= 9
+  when: ( ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or ansible_distribution == "Rocky" ) and ansible_distribution_major_version|int == 9
+
+
+- name: Define Facts for List of Packages
+  set_fact:
+    rh_install_pkgs: "{{ rh_common_dep_pkgs ~ ',' ~ rh10_dep_pkgs ~ ',' ~ rh10_python_pkgs }}"
+    rh_uninstall_pkgs: "{{ remove_rh_common_dep_pkgs ~ ',' ~ rh10_dep_pkgs ~ ',' ~ rh10_python_pkgs }}"
+    yum_python_version: "/usr/bin/python3"
+  when: ( ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or ansible_distribution == "Rocky" ) and ansible_distribution_major_version|int >= 10
 
 
 #- name: Define Fact of Package Names

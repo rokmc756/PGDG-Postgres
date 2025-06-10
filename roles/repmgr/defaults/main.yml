@@ -66,10 +66,10 @@ repmgr_install_only: true
 repmgr_install_postgresql: false
 
 #
-rh_common_dep_pkgs: "@Development tools,epel-release,perl,perl-libs,firewalld,readline-devel,libicu-devel,rsyslog,rsync,postgresql-devel,
+rh_common_dep_pkgs: "@Development tools,epel-release,perl,perl-libs,firewalld,readline-devel,libicu-devel,rsyslog,rsync,
 python3,python3-libs,python3-devel,python3-pip,python3-setuptools,python3-rpm-generators,gcc,python3-psycopg2,selinux-policy-targeted"
 
-remove_rh_common_dep_pkgs: "readline-devel,libicu-devel,rsyslog,rsync,postgresql-devel,python3-setuptools,python3-rpm-generators,python3-PyYAML,
+remove_rh_common_dep_pkgs: "readline-devel,libicu-devel,rsyslog,rsync,python3-setuptools,python3-rpm-generators,python3-PyYAML,
 python3-pathspec,python3-psycopg2,,epel-release"
 
 rh7_dep_pkgs: "tk"
@@ -83,6 +83,8 @@ rh8_python_pkgs: "python39,python39-pip,python39-libs,python39-devel"
 # python3-psycopg2, python3-PyYAML,
 
 rh9_python_pkgs: "python3.11,python3.11-pip,python3.11-libs,python3.11-devel"
+rh10_python_pkgs: "python3.12-pip,python3.12-devel"
+
 
 delete_file_list:
   - "/var/lib/pgsql/17/{{ pgsql.db_name }}"

@@ -17,9 +17,12 @@
   vars:
     ansible_python_interpreter: "{{ yum_python_version }}"
   with_items:
-    - postgresql-private-devel
-    - libpq
     - libpq5
+    - libpq
+    - postgresql-private-devel
+
+
+- debug: msg="{{ rh_install_pkgs }}"
 
 
 - name: Install Common Prerequisties RPM Packages for PostgreSQL

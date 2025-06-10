@@ -60,7 +60,7 @@
 - name: Define Facts for List of Dependencies Packages to Install or Uninstall
   set_fact:
     rh_install_pkgs: "{{ rh_common_dep_pkgs ~ ',' ~ rh10_dep_pkgs ~ ',' ~ rh10_python_pkgs }}"
-    rh_uninstall_pkgs: "{{ remove_rh_common_dep_pkgs ~ ',' ~ rh10_dep_pkgs }}"
+    rh_uninstall_pkgs: "{{ remove_rh_common_dep_pkgs ~ ',' ~ rh10_dep_pkgs ~ ',' ~ rh10_python_pkgs }}"
     yum_python_version: "/usr/bin/python3"
     setuptools_version: "69.0.3"
   when: ( ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or ansible_distribution == "Rocky" ) and ansible_distribution_major_version|int >= 10
