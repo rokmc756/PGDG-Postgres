@@ -97,4 +97,3 @@
   tags: disable, remove, uninstall
   when: ( repo is defined and repo == true ) or ( bucardo_all is defined and bucardo_all == true )
 
-

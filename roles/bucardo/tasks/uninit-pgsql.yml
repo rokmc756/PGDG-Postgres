@@ -21,5 +21,6 @@
     - "/var/lib/pgsql/{{ postgres_release }}/data"
     - "/var/lib/pgsql/{{ postgres_release }}/initdb.log"
     - "/var/lib/pgsql/{{ postgres_release }}"
-    - "/var/lib/pgsql/certs"
+    - "/home/postgres/.pgpass"
+    - "/home/postgres/.bucardorc"
 

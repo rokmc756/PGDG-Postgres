@@ -1,7 +1,4 @@
-127.0.0.1:5432:bucardo:bucardo:changeme
-192.168.2.221:5432:testdb:bucardo:changeme
-192.168.2.222:5432:testdb:bucardo:changeme
-192.168.2.223:5432:testdb:bucardo:changeme
-192.168.2.224:5432:testdb:bucardo:changeme
-192.168.2.225:5432:testdb:bucardo:changeme
-
+127.0.0.1:5432:{{ _bucardo.db_name }}:{{ _bucardo.db_user }}:{{ _bucardo.db_password }}
+{% for h in groups['all'] %}
+{{ hostvars[h][_netdev]['ipv4']['address'] }}:5432:{{ _bucardo.dbinfo[0].db_name }}:{{ _bucardo.dbinfo[0].db_user }}:{{ _bucardo.dbinfo[0].db_password }}
+{% endfor %}
