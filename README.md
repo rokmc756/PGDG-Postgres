@@ -1,5 +1,5 @@
 ## What is PGDG-Postgres Ansible Playbook?
-It is ansible playbook to deploy PGDG Postgres conveniently on Baremetal, Virtual Machines and Cloud Infrastructure.
+It is ansible playbook to deploy PGDG Postgres Single Instance, Patroni, DepMGR, PGAutoFailover, Bucardo Cluster conveniently on Baremetal, Virtual Machines and Cloud Infrastructure.
 It provide also pgwatch2 and grafana for monitoring features as well as SSL connection automatically when deploying it.
 The main purpose of this project is actually very simple. Because there are many jobs to install different kind of PGDG Postgres versions and reproduce issues & test features as a support
 engineer. I just want to spend less time for it.
@@ -44,7 +44,7 @@ ANSIBLE_TARGET_PASS="changeme"  # It should be changed with password of sudo use
 ## For Single PGDG Postgres
 #### 1) The Architecure of Single PGDG Postgres with pgwatch2 and grafana
 <p align="center">
-<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/pgwatch2/images/pgwatch2_architecture.png" width="80%" height="80%">
+<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/pgwatch2/images/pgwatch2_architecture.png" width="70%" height="70%">
 </p>
 
 #### 2) Configure Inventory for Single PGDG Postgres
@@ -136,7 +136,7 @@ $ make single r=uninstall s=all
 ## For Patroni Cluster
 #### 1) The Architecture of Patroni Cluster
 <p align="center">
-<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/patroni/images/patroni_architecture.jpeg" width="80%" height="80%">
+<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/patroni/images/patroni_architecture.jpeg" width="70%" height="70%">
 </p>
 
 #### 2) Configure Inventory for Patroni Cluster
@@ -238,7 +238,7 @@ $ make patroni r=uninstall s=all
 ## For PGAutoFailover Cluster
 #### 1) The Architecture
 <p align="center">
-<img src="https://github.com/rokmc756/PGDG-Postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg" width="80%" height="80%">
+<img src="https://github.com/rokmc756/PGDG-Postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg" width="70%" height="70%">
 </p>
 
 #### 2) Configure Inventory
@@ -327,7 +327,7 @@ $ make pgautofailover r=uninstall s=all
 #### 1) The Architecture
 
 <p align="center">
-<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/bucardo/images/bucardo-architecture.png" width="80%" height="80%">
+<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/bucardo/images/bucardo-architecture.png" width="70%" height="70%">
 </p>
 
 #### 2) Configure Inventory
