@@ -317,7 +317,7 @@ $ make pgautofailover r=uninstall s=all
 
 ## For Bucardo Multi Master
 #### 1) The Architecture
-![alt text](https://github.com/rokmc756/pgdg-postgres/blob/main/roles/buardo/images/bucardo-architecture.png)
+![alt text](https://github.com/rokmc756/PGDG-Postgres/blob/main/roles/bucardo/images/bucardo-architecture.png)
 
 #### 2) Configure Inventory
 $ vi ansible-hosts-rk9-bucardo
