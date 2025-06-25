@@ -238,7 +238,7 @@ $ make patroni r=uninstall s=all
 ## For PGAutoFailover Cluster
 #### 1) The Architecture
 <p align="center">
-<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg)" width="80%" height="80%">
+<img src="https://github.com/rokmc756/PGDG-Postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg" width="80%" height="80%">
 </p>
 
 #### 2) Configure Inventory
