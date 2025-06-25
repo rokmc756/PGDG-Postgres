@@ -43,7 +43,10 @@ ANSIBLE_TARGET_PASS="changeme"  # It should be changed with password of sudo use
 ```
 ## For Single PGDG Postgres
 #### 1) The Architecure of Single PGDG Postgres with pgwatch2 and grafana
-![alt text](https://github.com/rokmc756/vmware-postgres/blob/main/roles/pgwatch2/images/pgwatch2_architecture.png)
+<p align="center">
+<img src="https://github.com/rokmc756/vmware-postgres/blob/main/roles/pgwatch2/images/pgwatch2_architecture.png" width="90%" height="90%">
+</p>
+
 #### 2) Configure Inventory for Single PGDG Postgres
 ```yaml
 $ vi ansible-hosts-rk9-single
@@ -63,6 +66,7 @@ rk9-node03 ansible_ssh_host=192.168.2.193
 rk9-node04 ansible_ssh_host=192.168.2.194
 rk9-node05 ansible_ssh_host=192.168.2.195
 ```
+
 #### 3) Configure variables for Single PGDG Postgres
 ```yaml
 $ vi roles/single/vars/main.yml
@@ -131,7 +135,10 @@ $ make single r=uninstall s=all
 ```
 ## For Patroni Cluster
 #### 1) The Architecture of Patroni Cluster
-![alt text](https://github.com/rokmc756/vmware-postgres/blob/main/roles/patroni/images/patroni_architecture.jpeg)
+<p align="center">
+<img src="https://github.com/rokmc756/vmware-postgres/blob/main/roles/patroni/images/patroni_architecture.jpeg" width="90%" height="90%">
+</p>
+
 #### 2) Configure Inventory for Patroni Cluster
 $ vi ansible-hosts-rk9-patroni
 ```yaml
@@ -230,7 +237,9 @@ $ make patroni r=uninstall s=all
 ```
 ## For PGAutoFailover Cluster
 #### 1) The Architecture
-![alt text](https://github.com/rokmc756/vmware-postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg)
+<p align="center">
+<img src="https://github.com/rokmc756/vmware-postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg)" width="90%" height="90%">
+</p>
 
 #### 2) Configure Inventory
 $ vi ansible-hosts-rk9-pgautofailover
@@ -270,7 +279,6 @@ _pgfailover:
   cluster_name: pgfailclu01
   sslmode: prefer   # require
   enable_ssl: true
-
 
 _ssl:
   ssl_dir: "{{ pgsql.base_dir }}/certs"
@@ -317,7 +325,10 @@ $ make pgautofailover r=uninstall s=all
 
 ## For Bucardo Multi Master
 #### 1) The Architecture
-![alt text](https://github.com/rokmc756/PGDG-Postgres/blob/main/roles/bucardo/images/bucardo-architecture.png)
+
+<p align="center">
+<img src="https://github.com/rokmc756/PGDG-Postgres/blob/main/roles/bucardo/images/bucardo-architecture.png" width="90%" height="90%">
+</p>
 
 #### 2) Configure Inventory
 $ vi ansible-hosts-rk9-bucardo
@@ -327,10 +338,8 @@ ssh_key_filename="id_rsa"
 remote_machine_username="jomoon"
 remote_machine_password="changeme"
 
-
 [primary]
 rk9-node01  ansible_ssh_host=192.168.2.191  her_name=tDBsrv1  tdb_name=tDB1  relgroup=tDBsrv1 db_list=tDB1,tDB2,tDB3,tDB4,tDB5
-
 
 [secondary]
 rk9-node02  ansible_ssh_host=192.168.2.192  her_name=tDBsrv2  tdb_name=tDB2  relgroup=tDBsrv2 db_list=tDB2,tDB3,tDB4,tDB5,tDB1
@@ -408,7 +417,6 @@ $ make bucardo r=disable s=repo
 or
 $ make bucardo r=uninstall s=all
 ```
-
 
 ## Planning
 - [O] Need to fix SEGFAULT when enabling SSL for Patroni and PGAutoFailover - https://knowledge.broadcom.com/external/article/382919/master-panics-after-enabling-ssl-on-gree.html
