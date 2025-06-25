@@ -13,7 +13,7 @@ It's originated by itself.
 ## Supported Platform and OS
 * Virtual Machines
 * Baremetal
-* RHEL/CentOS/Rocky Linux 7.x, 8.x, 9.x
+* RHEL/CentOS/Rocky Linux 7.x, 8.x, 9.x, 10.x
 ## Prerequisite
 * MacOS or Fedora/CentOS/RHEL should have installed ansible as ansible host.
 * Supported OS for ansible target host should be prepared with package repository configured such as yum, dnf and apt
