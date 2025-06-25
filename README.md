@@ -44,7 +44,7 @@ ANSIBLE_TARGET_PASS="changeme"  # It should be changed with password of sudo use
 ## For Single PGDG Postgres
 #### 1) The Architecure of Single PGDG Postgres with pgwatch2 and grafana
 <p align="center">
-<img src="https://github.com/rokmc756/vmware-postgres/blob/main/roles/pgwatch2/images/pgwatch2_architecture.png" width="90%" height="90%">
+<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/pgwatch2/images/pgwatch2_architecture.png" width="80%" height="80%">
 </p>
 
 #### 2) Configure Inventory for Single PGDG Postgres
@@ -136,7 +136,7 @@ $ make single r=uninstall s=all
 ## For Patroni Cluster
 #### 1) The Architecture of Patroni Cluster
 <p align="center">
-<img src="https://github.com/rokmc756/vmware-postgres/blob/main/roles/patroni/images/patroni_architecture.jpeg" width="90%" height="90%">
+<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/patroni/images/patroni_architecture.jpeg" width="80%" height="80%">
 </p>
 
 #### 2) Configure Inventory for Patroni Cluster
@@ -238,7 +238,7 @@ $ make patroni r=uninstall s=all
 ## For PGAutoFailover Cluster
 #### 1) The Architecture
 <p align="center">
-<img src="https://github.com/rokmc756/vmware-postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg)" width="90%" height="90%">
+<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/pgautofailover/images/pgautofailover_architecture.svg)" width="80%" height="80%">
 </p>
 
 #### 2) Configure Inventory
@@ -327,7 +327,7 @@ $ make pgautofailover r=uninstall s=all
 #### 1) The Architecture
 
 <p align="center">
-<img src="https://github.com/rokmc756/PGDG-Postgres/blob/main/roles/bucardo/images/bucardo-architecture.png" width="90%" height="90%">
+<img src="https://github.com/rokmc756/pgdg-postgres/blob/main/roles/bucardo/images/bucardo-architecture.png" width="80%" height="80%">
 </p>
 
 #### 2) Configure Inventory
