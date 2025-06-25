@@ -74,10 +74,10 @@
   when: ( mmr is defined and mmr == true ) or ( bucardo_all is defined and bucardo_all == true )
 
 
-- name: Insert Users
+- name: Insert Users Data
   import_tasks: insert-users.yml
   tags: insert, install
-  when: ( user is defined and user == true ) or ( bucardo_all is defined and bucardo_all == true )
+  when: ( data is defined and data == true ) or ( bucardo_all is defined and bucardo_all == true )
 
 
 - name: Uninitialize PostgreSQL Database

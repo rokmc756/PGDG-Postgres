@@ -315,6 +315,100 @@ or
 $ make pgautofailover r=uninstall s=all
 ```
 
+## For Bucardo Multi Master
+#### 1) The Architecture
+![alt text](https://github.com/rokmc756/pgdg-postgres/blob/main/roles/buardo/images/bucardo-architecture.png)
+
+#### 2) Configure Inventory
+$ vi ansible-hosts-rk9-bucardo
+```yaml
+[all:vars]
+ssh_key_filename="id_rsa"
+remote_machine_username="jomoon"
+remote_machine_password="changeme"
+
+
+[primary]
+rk9-node01  ansible_ssh_host=192.168.2.191  her_name=tDBsrv1  tdb_name=tDB1  relgroup=tDBsrv1 db_list=tDB1,tDB2,tDB3,tDB4,tDB5
+
+
+[secondary]
+rk9-node02  ansible_ssh_host=192.168.2.192  her_name=tDBsrv2  tdb_name=tDB2  relgroup=tDBsrv2 db_list=tDB2,tDB3,tDB4,tDB5,tDB1
+rk9-node03  ansible_ssh_host=192.168.2.193  her_name=tDBsrv3  tdb_name=tDB3  relgroup=tDBsrv3 db_list=tDB3,tDB4,tDB5,tDB1,tDB2
+rk9-node04  ansible_ssh_host=192.168.2.194  her_name=tDBsrv4  tdb_name=tDB4  relgroup=tDBsrv4 db_list=tDB4,tDB5,tDB1,tDB2,tDB3
+rk9-node05  ansible_ssh_host=192.168.2.195  her_name=tDBsrv5  tdb_name=tDB5  relgroup=tDBsrv5 db_list=tDB5,tDB1,tDB2,tDB3,tDB4
+```
+
+#### 3) Configure Variables for Bucardo Multi Master
+```yaml
+$ vi roles/pgautofailover/vars/main.yml
+---
+~~ snip
+_bucardo:
+  base_path: "/root"
+  major_version: "5"
+  minor_version: "6"
+  patch_version: "0"
+  build_version: ""
+  os_version: el10
+  arch_type: x86_64
+  bin_type: tar.gz
+  db_name: bucardo
+  db_user: bucardo
+  db_password: 'changeme'
+  user: postgres
+  group: postgres
+  domain: "jtest.pivotal.io"
+  download: false
+  repo_url: ""
+  download_url: ""
+  dbinfo:
+    - { db_name: "testdb",        db_user: "bucardo",  db_password: "changeme", attr_flags: "SUPERUSER,CREATEDB,CREATEROLE,INHERIT,LOGIN,REPLICATION" }
+    - { db_name: "bucardo",       db_user: "bucardo",  db_password: "changeme", attr_flags: "SUPERUSER,CREATEDB,CREATEROLE,INHERIT,LOGIN,REPLICATION" }
+    - { db_name: "pgsql_testdb",  db_user: "jomoon",   db_password: "changeme", attr_flags: "SUPERUSER,CREATEDB,CREATEROLE,INHERIT,LOGIN,REPLICATION" }
+
+_dbix_safe:
+  base_path: "/root"
+  major_version: "1"
+  minor_version: "2"
+  patch_version: "5"
+  build_version: ""
+  os_version: el10
+  arch_type: x86_64
+  bin_type: tar.gz
+  domain: "jtest.pivotal.io"
+  download: false
+  repo_url: ""
+  download_url: ""
+~~ snip
+```
+
+#### 4) Deploy Bucardo Multi master
+```yaml
+$ make bucardo r=enable s=repo
+$ make bucardo r=install s=pkgs
+$ make bucardo r=enable s=ssl
+$ make bucardo r=cofig s=instance
+$ make bucardo r=add s=user
+$ make bucardo r=create s=table
+$ make bucardo r=setup s=bin
+$ make bucardo r=cofnig s=mmr
+$ make bucardo r=insert s=data
+
+or
+$ make bucardo r=install s=all
+```
+
+#### 5) Destroy Bucarod Multi Master
+```yaml
+$ make bucardo r=uninit s=db
+$ make bucardo r=uninstall s=pkgs
+$ make bucardo r=disable s=repo
+
+or
+$ make bucardo r=uninstall s=all
+```
+
 
 ## Planning
 - [O] Need to fix SEGFAULT when enabling SSL for Patroni and PGAutoFailover - https://knowledge.broadcom.com/external/article/382919/master-panics-after-enabling-ssl-on-gree.html
