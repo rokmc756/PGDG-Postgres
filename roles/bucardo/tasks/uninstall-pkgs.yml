@@ -1,5 +1,5 @@
 ---
-- name: Uninstall bucardo Packages
+- name: Uninstall Bucardo Packages
   yum:
     name: "{{ bucardo_package }}"
     state: present

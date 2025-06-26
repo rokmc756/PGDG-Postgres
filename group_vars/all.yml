@@ -43,7 +43,7 @@ pgsql:
       ipaddr2: "192.168.2.2"
   vms:
     rk9: [ "rk9-freeipa", "rk9-node01", "rk9-node02", "rk9-node03", "rk9-node04", "rk9-node05", "ubt22-lfs" ]
-    co10: [ "rk9-freeipa", "co10-node01", "co10-node02", "co10-node03", "co10-node04", "co10-node05" ]
+    co10: [ "rk9-freeipa", "co10-node01", "co10-node02", "co10-node03", "co10-node04", "co10-node05", "co10-node11", "co10-node12" ]
     ubt24: [ "rk9-freeipa", "ubt24-node01", "ubt24-node02", "ubt24-node03", "ubt24-node04", "ubt24-node05" ]
   debug_opt: ""  # --debug
 
