@@ -1,0 +1,25 @@
+---
+- hosts: lb
+  become: yes
+  vars:
+    print_debug: true
+  roles:
+    - temp
+
+
+#- hosts: ha1
+#  become: yes
+#  vars:
+#    print_debug: true
+#  roles:
+#     - { role: haproxy, keepalived_role: "master" }
+
+
+#- hosts: ha2
+#  become: yes
+#  vars:
+#    print_debug: true
+#  roles:
+#     - { role: haproxy, keepalived_role: "slave" }
+
+

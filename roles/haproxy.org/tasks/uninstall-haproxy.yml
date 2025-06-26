@@ -1,7 +1,5 @@
 ---
 # https://blog.dbi-services.com/using-ansible-to-bring-up-a-three-node-patroni-cluster-in-minutes/
-
-
 # we need to set this so that haproxy can not be started
 - name: Set SELinux Context for HAProxy
   become: true

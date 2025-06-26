@@ -31,16 +31,16 @@ pgsql:
   net:
     type: "virtual"                # Or Physical
     gateway: "192.168.0.1"
-    ipaddr0: "192.168.0.22"
-    ipaddr1: "192.168.1.22"
-    ipaddr2: "192.168.2.22"
+    ipaddr0: "192.168.0.2"
+    ipaddr1: "192.168.1.2"
+    ipaddr2: "192.168.2.2"
   client:
     net:
       type: "virtual"              # Or Physical
       cores: 1
-      ipaddr0: "192.168.0.22"
-      ipaddr1: "192.168.1.22"
-      ipaddr2: "192.168.2.22"
+      ipaddr0: "192.168.0.2"
+      ipaddr1: "192.168.1.2"
+      ipaddr2: "192.168.2.2"
   vms:
     rk9: [ "rk9-freeipa", "rk9-node01", "rk9-node02", "rk9-node03", "rk9-node04", "rk9-node05", "ubt22-lfs" ]
     co10: [ "rk9-freeipa", "co10-node01", "co10-node02", "co10-node03", "co10-node04", "co10-node05" ]
